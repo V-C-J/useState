@@ -1,0 +1,49 @@
+/*Instalar a biblioteca do Slider:
+  npx expo install @react-native-community/slider*/
+import { Text, View, TextInput, StyleSheet, Switch, ScrollView } from 'react-native';
+import Slider from '@react-native-community/slider'; //importação da biblioteca Slider que foi instalada
+import { useState } from 'react';
+
+export default function App() {
+
+  const [nome, setNome] = useState("");
+  const [not, setNot] = useState(true);
+  const [dif, setDif] = useState(5);
+
+  return (<View style={estilos.contenedor}><ScrollView >
+    <Text style={estilos.titulo}>Configuração de Perfil</Text>
+
+    <View><Text style={estilos.rotulo}>Nome:</Text><TextInput placeholder="João da Silva..."  value={nome} onChangeText={(v) => {setNome(v)}} /></View>
+
+    <View><Text>Receber notificações:</Text><Switch value={not} onValueChange={(v) => {setNot(v)}} trackColor={{false: "#ff9e9ec7", true: "#80f563c0" }} thumbColor={not? "#00aeff": "#ff00aa"}/></View>
+
+    {/* COMPONENTE NUMÉRICO (Slider) */}
+    <View><Text>Nível de dificuldade:</Text><Slider minimumValue={1} maximumValue={10} step={1} minimumTrackTintColor="#cc0000" maximumTrackTintColor="#000" value={dif} onValueChange={(v)=>setDif(v)}/></View>
+
+    <View><Text>Imput: {nome} </Text><Text>Switch: {not? "true":"false"}</Text><Text>Slider: {dif}</Text></View>
+  </ScrollView></View>)
+}
+
+const estilos = StyleSheet.create({// aplicar no primeiro view e no primeiro text
+  contenedor:{
+    flex:1,
+    backgroundColor: "#e2fcff",
+    padding: 40,
+    justifyContent: "center",
+    gap:15
+  },
+  titulo:{
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 30,
+    textAlign: "center",
+    color: "#ff0000"
+  },
+  rotulo: {
+    fontSize: 30,
+    fontWeight: "bold",
+    marginBottom: 30,
+    color: "#353535",
+    padding: 5
+  }
+})
